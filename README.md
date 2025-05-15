@@ -3,7 +3,24 @@
 Flask API для парсинга криптовалютных новостей и предоставления данных в формате JSON.
 
 ## Стек
-Находится в файле requirements.txt
+beautifulsoup4
+blinker
+certifi
+charset-normalizer
+click
+colorama
+Flask
+idna
+itsdangerous
+Jinja2
+MarkupSafe
+mysql-connector-python
+requests
+soupsieve
+typing_extensions
+urllib3
+Werkzeug
+python-dotenv
 ##  Установка
 
 ```bash
