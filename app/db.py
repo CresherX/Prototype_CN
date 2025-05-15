@@ -2,28 +2,25 @@ import mysql.connector
 from config import DB_CONFIG
 
 def init_db():
+    connection = None
     try:
         connection = mysql.connector.connect(**DB_CONFIG)
         cursor = connection.cursor()
-
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS articles (
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                title VARCHAR(255),
-                url VARCHAR(255),
-                source VARCHAR(100),
-                description TEXT
+                title TEXT NOT NULL,
+                content TEXT NOT NULL,
+                source VARCHAR(255) NOT NULL,
+                published_at DATETIME
             )
         """)
-
         connection.commit()
-        print("Database initialized successfully.")
-
+        print("DB initialized successfully.")
     except mysql.connector.Error as err:
         print(f"MySQL Error during DB initialization: {err}")
-
     finally:
-        if connection.is_connected():
+        if connection and connection.is_connected():
             cursor.close()
             connection.close()
 
