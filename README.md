@@ -21,6 +21,7 @@ typing_extensions
 urllib3
 Werkzeug
 python-dotenv
+flask_cors
 ##  Установка
 
 ```bash
