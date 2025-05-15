@@ -83,5 +83,24 @@ def insert_article(title, content, source, published_at):
         if connection.is_connected():
             cursor.close()
             connection.close()
+# Получение последних N статей
+def fetch_latest_articles_from_db(count):
+    try:
+        connection = mysql.connector.connect(**DB_CONFIG)
+        cursor = connection.cursor(dictionary=True)
 
-# Вставка статьи
+        query = "SELECT * FROM articles ORDER BY published_at DESC LIMIT %s"
+        cursor.execute(query, (count,))
+        results = cursor.fetchall()
+
+        return results
+
+    except mysql.connector.Error as err:
+        print(f"MySQL Error: {err}")
+        return []
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+
