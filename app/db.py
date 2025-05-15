@@ -64,4 +64,24 @@ def get_articles_by_source(source):
         if connection.is_connected():
             cursor.close()
             connection.close()
+def insert_article(title, content, source, published_at):
+    try:
+        connection = mysql.connector.connect(**DB_CONFIG)
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            INSERT INTO articles (title, content, source, published_at)
+            VALUES (%s, %s, %s, %s)
+        """, (title, content, source, published_at))
+
+        connection.commit()
+
+    except mysql.connector.Error as err:
+        print(f"MySQL Error: {err}")
+
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+
 # Вставка статьи
