@@ -8,7 +8,6 @@ CORS(app)
 init_db()
 
 # Регистрация Blueprint без префикса
-app.register_blueprint(routes, url_prefix="")
-
+app.register_blueprint(routes, url_prefix="/api")
 if __name__ == "__main__":
     app.run(debug=True)
