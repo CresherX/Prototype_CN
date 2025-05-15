@@ -14,7 +14,7 @@ def parse_cryptonews():
         title = article.find('a', class_='title').get_text(strip=True)
         link = article.find('a', class_='title')['href']
         source = 'Cryptonews'
-        insert_article(title, link, source)
+        insert_article(title, link, source, None)
         print(f"Insert Article: {title}, {link}, {source}, ")
         result.append({
             'title': title,
@@ -35,7 +35,7 @@ def parse_rbc():
         title = article.get_text(strip=True)
         link = article['href']
         source = 'RBC'
-        insert_article(title, link, source)
+        insert_article(title, link, source, None)
         print(f"Insert Article: {title}, {link}, {source}, ")
         result.append({
             'title': title,
