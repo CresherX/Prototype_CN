@@ -59,3 +59,6 @@ if __name__ == "__main__":
             print(f"Ссылка: {article['url']}")
             print(f"Описание: {article.get('description', 'Нет описания')}")
             print("-" * 40)
+def parse_articles():
+    parse_cryptonews()
+    parse_rbc()
