@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from db import insert_article
+from app.db import insert_article
 insert_article(title, content, source, published_at)
 
 def parse_cryptonews():
