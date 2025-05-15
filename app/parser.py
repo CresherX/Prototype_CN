@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 from app.db import insert_article
-insert_article(title, content, source, published_at)
 
 def parse_cryptonews():
     url = 'https://cryptonews.net/ru/news/'
@@ -15,7 +14,7 @@ def parse_cryptonews():
         title = article.find('a', class_='title').get_text(strip=True)
         link = article.find('a', class_='title')['href']
         source = 'Cryptonews'
-        insert_article(title, link, source, None)
+        insert_article(title, link, source)
         print(f"Insert Article: {title}, {link}, {source}, ")
         result.append({
             'title': title,
@@ -36,7 +35,7 @@ def parse_rbc():
         title = article.get_text(strip=True)
         link = article['href']
         source = 'RBC'
-        insert_article(title, link, source, None)
+        insert_article(title, link, source)
         print(f"Insert Article: {title}, {link}, {source}, ")
         result.append({
             'title': title,
