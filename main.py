@@ -7,12 +7,19 @@ app = Flask(__name__)
 CORS(app)
 
 init_db()
+
 @app.route("/parse", methods=["GET"])
 def trigger_parse():
     from app.parser import parse_articles  
     parse_articles()  # вызывает insert_article
     return "Парсинг выполнен", 200
-# Регистрация Blueprint без префикса
+
+# Регистрируем blueprint с префиксом /api
 app.register_blueprint(routes, url_prefix="/api")
+
+@app.route("/")
+def home():
+    return "Главная страница"
+
 if __name__ == "__main__":
     app.run(debug=True)
