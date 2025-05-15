@@ -17,3 +17,4 @@ urllib3
 Werkzeug
 python-dotenv
 flask_cors
+gunicorn
