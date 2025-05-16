@@ -4,24 +4,39 @@ from app.db import insert_article
 
 def parse_cryptonews():
     url = 'https://cryptonews.net/ru/news/'
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {
+        'User-Agent': 'Mozilla/5.0',
+        'Accept-Language': 'ru-RU,ru;q=0.9',
+    }
     response = requests.get(url, headers=headers)
+
+    if response.status_code != 200:
+        print(f"Ошибка при загрузке Cryptonews: {response.status_code}")
+        return []
+
     soup = BeautifulSoup(response.text, 'html.parser')
-    articles = soup.find_all('li', class_='cn-tile article')
+    articles = soup.select('div.article__item')  # Обновлённый селектор
     result = []
 
     for article in articles:
-        title = article.find('a', class_='title').get_text(strip=True)
-        link = article.find('a', class_='title')['href']
+        a_tag = article.find('a', class_='article__title')
+        if not a_tag:
+            continue
+
+        title = a_tag.get_text(strip=True)
+        link = "https://cryptonews.net" + a_tag['href']
         source = 'Cryptonews'
+
         insert_article(title, link, source, None)
-        print(f"Insert Article: {title}, {link}, {source}, ")
+        print(f"Insert Article: {title}, {link}, {source}")
         result.append({
             'title': title,
             'url': link,
             'description': None
         })
+
     return result
+
 
 def parse_rbc():
     url = 'https://www.rbc.ru/crypto/'
