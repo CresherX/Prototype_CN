@@ -16,7 +16,7 @@ app.register_blueprint(routes, url_prefix="/api")
 @app.route("/parse", methods=["GET"])
 def trigger_parse():
     from app.parser import parse_articles  
-    parse_articles()  # вызывает insert_article
+    parse_articles()  # вызовт parse_articles
     return "Парсинг выполнен", 200
 
 # Запуск сервера
